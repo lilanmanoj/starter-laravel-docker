@@ -12,14 +12,14 @@ services:
       - mysql
       - redis
     environment:
-      DB_CONNECTION=mysql
-      DB_HOST=mysql
-      DB_PORT=3306
-      DB_DATABASE=laravel-app
-      DB_USERNAME=laravel-user
-      DB_PASSWORD=pass
-      REDIS_HOST=redis
-      REDIS_PORT=6379
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravel-app
+      DB_USERNAME: laravel-user
+      DB_PASSWORD: pass
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
   mysql:
     image: mysql:8.0
