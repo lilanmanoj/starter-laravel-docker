@@ -25,9 +25,26 @@ if ! grep -q "APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
+# Update .env with correct environment variables
+echo "Updating .env with database and Redis settings..."
+sed -i "s|DB_CONNECTION=.*|DB_CONNECTION=mysql|" .env
+sed -i "s|DB_HOST=.*|DB_HOST=${DB_HOST}|" .env
+sed -i "s|DB_PORT=.*|DB_PORT=${DB_PORT}|" .env
+sed -i "s|DB_DATABASE=.*|DB_DATABASE=${DB_DATABASE}|" .env
+sed -i "s|DB_USERNAME=.*|DB_USERNAME=${DB_USERNAME}|" .env
+sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=${DB_PASSWORD}|" .env
+sed -i "s|REDIS_HOST=.*|REDIS_HOST=${REDIS_HOST}|" .env
+sed -i "s|REDIS_PORT=.*|REDIS_PORT=${REDIS_PORT}|" .env
+
 # Wait for MySQL before migrations
 echo "Waiting for MySQL..."
-until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" --silent; do
+until php -r "
+try {
+    new PDO('mysql:host=${DB_HOST};dbname=${DB_DATABASE}', '${DB_USERNAME}', '${DB_PASSWORD}');
+    exit(0);
+} catch (Exception \$e) {
+    exit(1);
+}" >/dev/null 2>&1; do
     sleep 2
 done
 echo "MySQL is up!"

@@ -25,6 +25,7 @@ services:
     image: mysql:8.0
     container_name: laravel_mysql
     restart: always
+    command: --default-authentication-plugin=mysql_native_password --skip-ssl
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel-app
