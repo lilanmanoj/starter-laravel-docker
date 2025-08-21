@@ -29,6 +29,7 @@ RUN apk update && apk add --no-cache \
     php83-phar \
     php83-ctype \
     php83-json \
+    mysql-client \
     curl \
     unzip \
     git \
