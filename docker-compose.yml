@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: laravel_app
+    volumes:
+      - .:/var/www/html   # Laravel will live in root folder
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+      - redis
+    environment:
+      DB_CONNECTION=mysql
+      DB_HOST=mysql
+      DB_PORT=3306
+      DB_DATABASE=laravel-app
+      DB_USERNAME=laravel-user
+      DB_PASSWORD=pass
+      REDIS_HOST=redis
+      REDIS_PORT=6379
+
+  mysql:
+    image: mysql:8.0
+    container_name: laravel_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel-app
+      MYSQL_USER: laravel-user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    container_name: laravel_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysql_data:
