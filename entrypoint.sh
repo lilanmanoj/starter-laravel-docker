@@ -35,11 +35,11 @@ chmod -R 777 $APP_DIR/storage $APP_DIR/bootstrap/cache
 # Update .env with correct environment variables
 echo "Updating .env with database and Redis settings..."
 sed -i "s|DB_CONNECTION=.*|DB_CONNECTION=mysql|" .env
-sed -i "s|DB_HOST=.*|DB_HOST=${DB_HOST}|" .env
-sed -i "s|DB_PORT=.*|DB_PORT=${DB_PORT}|" .env
-sed -i "s|DB_DATABASE=.*|DB_DATABASE=${DB_DATABASE}|" .env
-sed -i "s|DB_USERNAME=.*|DB_USERNAME=${DB_USERNAME}|" .env
-sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=${DB_PASSWORD}|" .env
+sed -i "s|# DB_HOST=.*|DB_HOST=${DB_HOST}|" .env
+sed -i "s|# DB_PORT=.*|DB_PORT=${DB_PORT}|" .env
+sed -i "s|# DB_DATABASE=.*|DB_DATABASE=${DB_DATABASE}|" .env
+sed -i "s|# DB_USERNAME=.*|DB_USERNAME=${DB_USERNAME}|" .env
+sed -i "s|# DB_PASSWORD=.*|DB_PASSWORD=${DB_PASSWORD}|" .env
 sed -i "s|REDIS_HOST=.*|REDIS_HOST=${REDIS_HOST}|" .env
 sed -i "s|REDIS_PORT=.*|REDIS_PORT=${REDIS_PORT}|" .env
 
