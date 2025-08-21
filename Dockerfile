@@ -40,7 +40,7 @@ RUN apk update && apk add --no-cache \
 RUN echo "LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so" >> /etc/apache2/httpd.conf && \
     echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/apache2/httpd.conf && \
     echo "ServerName localhost" >> /etc/apache2/httpd.conf && \
-    mkdir -p /run/apache2
+    mkdir -p /run/apache2 && chown apache:apache /run/apache2
 
 # Working directory → project root (mounted volume)
 WORKDIR /var/www/html
@@ -49,7 +49,7 @@ WORKDIR /var/www/html
 RUN composer create-project laravel/laravel laravel-app
 
 # Set Apache DocumentRoot to Laravel public directory
-RUN sed -i 's#DocumentRoot ".*"#DocumentRoot "/var/www/html/laravel-app/public"#' /etc/apache2/httpd.conf
+RUN sed -i 's#DocumentRoot ".*"#DocumentRoot "/var/www/html/public"#' /etc/apache2/httpd.conf
 
 # Expose port
 EXPOSE 80

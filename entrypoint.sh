@@ -25,6 +25,10 @@ if ! grep -q "APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
+# Fix storage & bootstrap/cache permissions
+chown -R apache:apache $APP_DIR/storage $APP_DIR/bootstrap/cache
+chmod -R 775 $APP_DIR/storage $APP_DIR/bootstrap/cache
+
 # Update .env with correct environment variables
 echo "Updating .env with database and Redis settings..."
 sed -i "s|DB_CONNECTION=.*|DB_CONNECTION=mysql|" .env
