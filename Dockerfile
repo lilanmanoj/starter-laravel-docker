@@ -42,6 +42,9 @@ RUN echo "LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so" >> /etc/apache
     echo "ServerName localhost" >> /etc/apache2/httpd.conf && \
     mkdir -p /run/apache2 && chown apache:apache /run/apache2
 
+# Set DirectoryIndex
+RUN echo "DirectoryIndex index.php index.html" >> /etc/apache2/httpd.conf
+
 RUN echo '<Directory "/var/www/html/public">' >> /etc/apache2/httpd.conf \
     && echo '    Options Indexes FollowSymLinks' >> /etc/apache2/httpd.conf \
     && echo '    AllowOverride All' >> /etc/apache2/httpd.conf \
