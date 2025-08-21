@@ -37,7 +37,7 @@ RUN apk update && apk add --no-cache \
     supervisor
 
 # Enable Apache + PHP integration
-RUN echo "LoadModule proxy_module modules/mod_proxy.so" >> /etc/apache2/httpd.conf \
+RUN echo "LoadModule proxy_module modules/mod_proxy.so" >> /etc/apache2/httpd.conf && \
     echo "LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so" >> /etc/apache2/httpd.conf && \
     echo "LoadModule rewrite_module modules/mod_rewrite.so" >> /etc/apache2/httpd.conf && \
     echo "<FilesMatch \\.php\$>" >> /etc/apache2/httpd.conf && \
