@@ -30,6 +30,7 @@ echo "Fixing permissions..."
 # Give apache ownership of all app files
 chown -R apache:apache $APP_DIR/public $APP_DIR/storage $APP_DIR/resources $APP_DIR/routes $APP_DIR/config $APP_DIR/database $APP_DIR/bootstrap $APP_DIR/bootstrap/cache
 chmod -R 755 $APP_DIR $APP_DIR/storage $APP_DIR/bootstrap/cache
+chmod -R 777 $APP_DIR/storage $APP_DIR/bootstrap/cache
 
 # Update .env with correct environment variables
 echo "Updating .env with database and Redis settings..."
