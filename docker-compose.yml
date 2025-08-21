@@ -5,7 +5,7 @@ services:
     build: .
     container_name: laravel_app
     volumes:
-      - .:/var/www/html   # Laravel will live in root folder
+      - ./app:/var/www/html   # Laravel lives inside ./app
     ports:
       - "8080:80"
     depends_on:

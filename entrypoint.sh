@@ -3,9 +3,9 @@ set -e
 
 APP_DIR=/var/www/html
 
-# If no artisan file → Laravel not installed
+# If artisan not found → Laravel not installed
 if [ ! -f "$APP_DIR/artisan" ]; then
-    echo "Laravel not found. Installing latest version..."
+    echo "Laravel not found. Installing latest version into $APP_DIR..."
     composer create-project laravel/laravel $APP_DIR
     echo "Laravel installed."
 else
@@ -25,7 +25,7 @@ if ! grep -q "APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
-# Wait for MySQL
+# Wait for MySQL before migrations
 echo "Waiting for MySQL..."
 until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" --silent; do
     sleep 2
